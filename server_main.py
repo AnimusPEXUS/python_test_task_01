@@ -19,8 +19,11 @@ def entity():
 
     print("PY_TEST_SERVER_DB ==", PY_TEST_SERVER_DB)
 
+    engine_cmd = 'postgresql://postgres:example@' + PY_TEST_SERVER_DB + '/postgres'
+    print("SQLAlchemy engine cmd:", engine_cmd)
+
     engine = sqlalchemy.create_engine(
-        'postgresql:///postgres:example@' + PY_TEST_SERVER_DB + '/postgres',
+        engine_cmd,
         echo=True
     )
 
