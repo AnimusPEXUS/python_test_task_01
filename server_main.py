@@ -128,9 +128,10 @@ Entity
         session.add(serv_r)
 
     session.commit()
-    session.close()
 
     q.put(phone_r.id)
+
+    session.close()
 
     return
 
