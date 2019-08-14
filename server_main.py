@@ -151,7 +151,7 @@ def check_phone_record():
             query(db_schemas.Phone).\
             filter_by(id=record_id).\
             first()
-        phone_r.is_mobile = re.fullmatch(r"(\+7|8)\d{10}", phone_r.phone)
+        phone_r.is_mobile = re.fullmatch(r"(\+7|8)\d{10}", phone_r.phone) != None
         session.commit()
         print("phone_r.is_mobile set to", phone_r.is_mobile)
         q.task_done()
