@@ -42,8 +42,6 @@ def entity():
     # see pydoc http://localhost:46213/lxml.etree.html#XMLParser
     parser = lxml.etree.XMLParser(schema=schema)
 
-    sys.stdout.flush()
-
     try:
         parsed = lxml.etree.parse(bottle_request_body, parser)
     except lxml.etree.XMLSyntaxError as e:
@@ -52,7 +50,6 @@ def entity():
         return
     finally:
         session.commit()
-        sys.stdout.flush()
 
     msg_r.is_valid = True
 
@@ -86,11 +83,8 @@ Entity
             )
         )
 
-    sys.stdout.flush()
-
     return
 
 
 print("TEST TASK PY XML SERVER")
-sys.stdout.flush()
 bottle.run(host='0.0.0.0', port=8080)
