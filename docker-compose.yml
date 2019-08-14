@@ -9,7 +9,7 @@ services:
       PY_TEST_SERVER_DB: db
     ports:
       - 8080:8080
-    command:             python server_main.py
+    command:             python -u ./server_main.py
 
   db:
     image:               postgres
