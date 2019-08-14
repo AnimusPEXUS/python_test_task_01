@@ -5,6 +5,7 @@ import db_schemas
 import schema_root
 import sqlalchemy
 import sqlalchemy.orm
+import os
 
 
 schema = lxml.etree.XMLSchema(schema_root.schema_root)
@@ -85,5 +86,5 @@ Entity
 
 
 print("TEST TASK PY XML SERVER")
-
+os.stdout.flush()
 bottle.run(host='0.0.0.0', port=8080)
