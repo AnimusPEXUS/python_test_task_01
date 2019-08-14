@@ -4,6 +4,7 @@ import sys
 import copy
 import re
 import queue
+import threading
 
 import bottle
 import lxml.etree
