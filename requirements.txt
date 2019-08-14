@@ -1,3 +1,4 @@
 SQLAlchemy
 lxml
 bottle
+psycopg2

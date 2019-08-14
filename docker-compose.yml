@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+
+  pytestserver:
+    build: https://github.com/AnimusPEXUS/python_test_task_01.git
+    restart: always
+    environment:
+      PY_TEST_SERVER_DB: db
+    command: python server_main.py
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example

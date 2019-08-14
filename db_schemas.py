@@ -1,27 +1,31 @@
 
 from sqlalchemy import Integer, String, Column, Boolean, DateTime
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
 
 
-class Message:
+class Message(Base):
     __tablename__ = 'messages'
     id = Column(Integer, primary_key=True)
     text = Column(String)
-    is_valid =Column(Boolean)
+    is_valid = Column(Boolean)
 
-class Entity:
+
+class Entity(Base):
     __tablename__ = 'entities'
     id = Column(Integer, primary_key=True)
     name = Column(String)
 
 
-class Email:
+class Email(Base):
     __tablename__ = 'emails'
     id = Column(Integer, primary_key=True)
     entity_id = Column(Integer)
     email = Column(String)
 
 
-class Phone:
+class Phone(Base):
     __tablename__ = 'phones'
     id = Column(Integer, primary_key=True)
     entity_id = Column(Integer)
@@ -29,7 +33,7 @@ class Phone:
     is_mobile = Column(Boolean)
 
 
-class Service:
+class Service(Base):
     __tablename__ = 'services'
     id = Column(Integer, primary_key=True)
     entity_id = Column(Integer)
