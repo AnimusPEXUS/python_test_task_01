@@ -86,5 +86,5 @@ Entity
 
 
 print("TEST TASK PY XML SERVER")
-os.stdout.flush()
+sys.stdout.flush()
 bottle.run(host='0.0.0.0', port=8080)
