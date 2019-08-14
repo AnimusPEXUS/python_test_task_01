@@ -148,7 +148,7 @@ def check_phone_record():
 
 print("TEST TASK PY XML SERVER")
 
-cfg = yaml.load("config.yml")
+cfg = yaml.load("config.yml", Loader=yaml.SafeLoader)
 
 print("Config:")
 print("  threads: ", cfg['threads'])
