@@ -1,12 +1,15 @@
 
-import bottle
-import lxml.etree
-import db_schemas
-import schema_root
-import sqlalchemy
-import sqlalchemy.orm
 import os
 import sys
+import copy
+
+import bottle
+import lxml.etree
+import sqlalchemy
+import sqlalchemy.orm
+
+import db_schemas
+import schema_root
 
 
 schema = lxml.etree.XMLSchema(schema_root.schema_root)
@@ -32,7 +35,7 @@ def entity():
     Session = sqlalchemy.orm.sessionmaker(bind=engine)
     session = Session()
 
-    bottle_request_body = copy(bottle.request.body)
+    bottle_request_body = copy.copy(bottle.request.body)
 
     msg_r = db_schemas.Message()
     msg_r.text = str(bottle_request_body)
