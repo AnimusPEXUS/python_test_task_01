@@ -2,7 +2,7 @@
 
 This is test task implementation for some employer.
 
-## How to Run ==
+## How to Run
 
 I'm using Fedora with docker installation
 
