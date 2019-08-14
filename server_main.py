@@ -57,6 +57,8 @@ def entity():
     finally:
         session.commit()
 
+    print("new message id ==", msg_r.id)
+
     msg_r.is_valid = True
 
     name = parsed.find("Entity/Name")
