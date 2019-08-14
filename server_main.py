@@ -6,6 +6,7 @@ import schema_root
 import sqlalchemy
 import sqlalchemy.orm
 import os
+import sys
 
 
 schema = lxml.etree.XMLSchema(schema_root.schema_root)
