@@ -84,4 +84,6 @@ Entity
     return
 
 
-bottle.run(host='localhost', port=8080)
+print("TEST TASK PY XML SERVER")
+
+bottle.run(host='0.0.0.0', port=8080)
