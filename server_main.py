@@ -1,16 +1,15 @@
 
 import os
-import sys
 import copy
 import re
 import queue
 import threading
 
-import bottle
 import lxml.etree
 import sqlalchemy
 import sqlalchemy.orm
 import yaml
+import bottle
 
 import db_schemas
 import schema_root
@@ -18,19 +17,20 @@ import schema_root
 
 schema = lxml.etree.XMLSchema(schema_root.schema_root)
 
+PY_TEST_SERVER_DB = os.environ['PY_TEST_SERVER_DB']
+
+ENGINE_CMD = 'postgresql://postgres:example@' + PY_TEST_SERVER_DB + '/postgres'
+
 
 @bottle.post('/entity')
 def entity():
 
-    PY_TEST_SERVER_DB = os.environ['PY_TEST_SERVER_DB']
-
     print("PY_TEST_SERVER_DB ==", PY_TEST_SERVER_DB)
 
-    engine_cmd = 'postgresql://postgres:example@' + PY_TEST_SERVER_DB + '/postgres'
-    print("SQLAlchemy engine cmd:", engine_cmd)
+    print("SQLAlchemy engine cmd:", ENGINE_CMD)
 
     engine = sqlalchemy.create_engine(
-        engine_cmd,
+        ENGINE_CMD,
         echo=True
     )
 
@@ -141,7 +141,7 @@ def check_phone_record():
         record_id = q.get()
 
         engine = sqlalchemy.create_engine(
-            engine_cmd,
+            ENGINE_CMD,
             echo=True
         )
 
@@ -151,7 +151,7 @@ def check_phone_record():
             query(db_schemas.Phone).\
             filter_by(id=record_id).\
             first()
-        phone_r.is_mobile = re.fullmatch("(\+7|8)\d{10}", phone_r.phone)
+        phone_r.is_mobile = re.fullmatch(r"(\+7|8)\d{10}", phone_r.phone)
         session.commit()
         print("phone_r.is_mobile set to", phone_r.is_mobile)
         q.task_done()
