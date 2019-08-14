@@ -36,8 +36,7 @@ def entity():
 
     db_schemas.Base.metadata.create_all(engine)
 
-    Session = sqlalchemy.orm.sessionmaker(bind=engine)
-    session = Session()
+    session = sqlalchemy.orm.sessionmaker(bind=engine)()
 
     bottle_request_body = copy.copy(bottle.request.body)
 
@@ -129,6 +128,7 @@ Entity
         session.add(serv_r)
 
     session.commit()
+    session.close()
 
     q.put(phone_r.id)
 
@@ -138,6 +138,14 @@ Entity
 def check_phone_record():
     while True:
         record_id = q.get()
+
+        engine = sqlalchemy.create_engine(
+            engine_cmd,
+            echo=True
+        )
+
+        session = sqlalchemy.orm.sessionmaker(bind=engine)()
+
         phone_r = session.\
             query(db_schemas.Phone).\
             filter_by(id=record_id).\
@@ -146,6 +154,7 @@ def check_phone_record():
         session.commit()
         print("phone_r.is_mobile set to", phone_r.is_mobile)
         q.task_done()
+        session.close()
 
 
 print("TEST TASK PY XML SERVER")
