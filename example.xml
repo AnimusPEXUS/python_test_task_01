@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Body>
+  <Entity>
+    <Name>Name</Name>
+    <Phone>+77772347122;89999999999</Phone>
+    <Email>login@domain.com;login2@domain.com</Email>
+    <Services>
+      <Service is_main="true">
+        <Name>Service</Name>
+        <Availability>
+          <From>2019-01-01 00:00:00</From>
+          <To>2019-12-01 23:59:59</To>
+        </Availability>
+      </Service>
+      <Service is_main="false">
+        <Name>Service 2</Name>
+        <Availability>
+          <From>2019-02-01 00:00:00</From>
+          <To>2019-11-01 23:59:59</To>
+        </Availability>
+      </Service>
+    </Services>
+  </Entity>
+</Body>
