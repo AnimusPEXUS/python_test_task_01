@@ -16,6 +16,7 @@ class Entity(Base):
     __tablename__ = 'entities'
     id = Column(Integer, primary_key=True)
     name = Column(String)
+    original_message_id = Column(Integer)
 
 
 class Email(Base):

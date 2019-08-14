@@ -91,6 +91,41 @@ Entity
             )
         )
 
+    entity_r = db_schemas.Entity()
+    entity_r.name = name.text
+    entity_r.original_message_id = msg_r.id
+
+    session.add(entity_r)
+    session.commit()
+
+    phone_r = db_schemas.Phone()
+    phone_r.entity_id = entity_r.id
+    phone_r.phone = phone.text
+
+    # calculated in separate threads, as specified by task
+    phone_r.is_mobile = False
+
+    session.add(phone_r)
+
+    email_r = db_schemas.Email()
+    email_r.entity_id = entity_r.id
+    email_r.email = email.text
+
+    session.add(email_r)
+
+    for i in parsed.find("Entity/Services").iter("Service"):
+
+        serv_r = db_schemas.Service()
+        serv_r.entity_id = entity_r.id
+        serv_r.name = i.find("Name").text
+        serv_r.is_main = i.get("is_main") == "true"
+        serv_r.available_from = i.find("Availability/From").text
+        serv_r.available_to = i.find("Availability/To").text
+
+        session.add(serv_r)
+
+    session.commit()
+
     return
 
 
