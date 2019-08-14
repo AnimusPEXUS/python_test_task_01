@@ -32,7 +32,7 @@ def entity():
     Session = sqlalchemy.orm.sessionmaker(bind=engine)
     session = Session()
 
-    bottle_request_body = bytes(bottle.request.body)
+    bottle_request_body = copy(bottle.request.body)
 
     msg_r = db_schemas.Message()
     msg_r.text = str(bottle_request_body)
