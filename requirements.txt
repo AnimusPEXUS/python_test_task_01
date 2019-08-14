@@ -2,3 +2,4 @@ SQLAlchemy
 lxml
 bottle
 psycopg2
+pyyaml

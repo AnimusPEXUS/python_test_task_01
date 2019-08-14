@@ -2,11 +2,13 @@
 import os
 import sys
 import copy
+import re
 
 import bottle
 import lxml.etree
 import sqlalchemy
 import sqlalchemy.orm
+import yaml
 
 import db_schemas
 import schema_root
@@ -126,8 +128,37 @@ Entity
 
     session.commit()
 
+    q.put(phone_r.id)
+
     return
 
 
+def check_phone_record():
+    while True:
+        record_id = q.get()
+        phone_r = session.\
+            query(db_schemas.Phone).\
+            filter_by(id=record_id).\
+            first()
+        phone_r.is_mobile = re.fullmatch("(\+7|8)\d{10}", phone_r.phone)
+        session.commit()
+        print("phone_r.is_mobile set to", phone_r.is_mobile)
+        q.task_done()
+
+
 print("TEST TASK PY XML SERVER")
+
+cfg = yaml.load("config.yml")
+
+print("Config:")
+print("  threads: ", cfg['threads'])
+
+q = queue.Queue()
+threads = []
+for i in range(cfg['threads']):
+    t = threading.Thread(target=check_phone_record)
+    t.start()
+    threads.append(t)
+
+
 bottle.run(host='0.0.0.0', port=8080)
