@@ -24,7 +24,7 @@ def entity():
         echo=True
     )
 
-    db_schemas.Base.create_all(engine)
+    db_schemas.Base.metadata.create_all(engine)
 
     Session = sqlalchemy.orm.sessionmaker(bind=engine)
     session = Session()
