@@ -6,7 +6,7 @@ services:
     build:               https://github.com/AnimusPEXUS/python_test_task_01.git
     restart:             always
     environment:
-      PY_TEST_SERVER_DB: db
+      PY_TEST_SERVER_DB: db:5432
     ports:
       - 8080:8080
     command:             python -u ./server_main.py
