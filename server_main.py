@@ -3,6 +3,7 @@ import os
 import sys
 import copy
 import re
+import queue
 
 import bottle
 import lxml.etree
